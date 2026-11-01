@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Projecten | Browser View</title>
+  <!-- Google Fonts: Bricolage Grotesque, DM Sans & IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Koppeling met websites.css -->
+  <link rel="stylesheet" href="websites.css">
+  <!-- Koppeling met websites.js -->
+  <script src="websites.js" defer></script>
+</head>
+<body class="browser-environment">
+
+  <!-- CUSTOM CURSOR -->
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <!-- NEP BROWSERINTERFACE (VOLLLEDIGE VIEWPORT) -->
+  <div class="fullscreen-browser">
+
+    <!-- BROWSER TOP BAR (Window controls, Pastel Tabs, Adresbalk & Terugknop) -->
+    <header class="browser-top-bar">
+      
+      <div class="browser-bar-left">
+        <!-- Window control stippen -->
+        <div class="window-controls">
+          <span class="control-dot control-red" title="Pink"></span>
+          <span class="control-dot control-yellow" title="Gold"></span>
+          <span class="control-dot control-green" title="Fern"></span>
+        </div>
+
+        <!-- DRIE BROWSER TABS MET SUBTIEL EIGEN PASTEL KARAKTER -->
+        <div class="browser-tabs" role="tablist">
+          <button class="browser-tab tab-pink active interactive" data-tab="tab-1" role="tab" aria-selected="true">
+            <span class="tab-dot"></span>
+            <span class="tab-title">Project 01 &bull; Web App</span>
+          </button>
+
+          <button class="browser-tab tab-olive interactive" data-tab="tab-2" role="tab" aria-selected="false">
+            <span class="tab-dot"></span>
+            <span class="tab-title">Project 02 &bull; Design Studio</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- BROWSER ADRESBALK MIDDEN -->
+      <div class="browser-address-bar">
+        <span class="address-lock">🔒</span>
+        <span class="address-text" id="addressUrl">https://mijnportfolio.nl/projecten/web-app</span>
+      </div>
+
+      <!-- TERUGKNOP RECHTSBOVEN IN DE BROWSERBAR -->
+      <a href="index.html" class="browser-back-link interactive" title="Terug naar Home">
+        &larr; Sluit browser
+      </a>
+
+    </header>
+
+    <!-- BROWSER VIEWPORT (PROJECTCONTENT DIRECT OP CANVAS) -->
+    <main class="browser-viewport">
+
+      <!-- TAB 1 CONTENT: PROJECT 1 -->
+      <section class="tab-panel active" id="project-tab-1" role="tabpanel">
+        <div class="editorial-project-layout">
+          
+          <!-- LINKS: GROTE WEBSITE SCREENSHOT -->
+          <div class="hero-screenshot-col">
+            <div class="media-frame frame-rotate-subtle">
+              <img src="images/website1-main.png" alt="Screenshot Kattenwebshop" class="screenshot-img">
+              <div class="image-placeholder">
+                <span class="ph-label">Grote Screenshot Project 01</span>
+                <span class="ph-hint">images/website1-main.png</span>
+              </div>
+            </div>
+            
+            <!-- SECONDAIRE DETAILS MET IBM PLEX MONO PROCES ANNOTATIES -->
+            <div class="secondary-screenshots-grid">
+              <div class="media-frame sub-frame">
+                <img src="images/website1-detail1.png" alt="UX Wireframe" class="screenshot-img">
+                <div class="image-placeholder ph-small">Detail 01: Layout &amp; Code</div>
+              </div>
+              <div class="media-frame sub-frame">
+                <img src="images/website1-detail2.png" alt="Mobile View" class="screenshot-img">
+                <div class="image-placeholder ph-small">Detail 02: Responsive Styling</div>
+              </div>
+            </div>
+            <span class="annotation note-process">&larr; html, css &amp; javascript development</span>
+          </div>
+
+          <!-- RECHTS: TYPOGRAFISCHE BESCHRIJVING DIREKCT OP CANVAS -->
+          <div class="project-editorial-col">
+            <span class="annotation project-category">01 / HTML &bull; CSS &bull; JAVASCRIPT</span>
+            <h1 class="project-title">Interactieve webshop</h1>
+            
+            <p class="project-lead">
+              Voor CT maakten we een webshop waarin we zelf aan de slag gingen met HTML, CSS en JavaScript. Ik koos voor katten als thema, waardoor ik het project ook visueel leuk kon maken. Een groot deel van de code heb ik zelf geschreven, waardoor ik tijdens dit project vooral veel heb geleerd over het opbouwen en stylen van een werkende website.
+            </p>
+            
+            <div class="editorial-process-block">
+              <h2 class="process-subheading">Ontwerpproces &amp; Inzichten</h2>
+              <p>
+                Tijdens dit project merkte ik dat ik steeds zelfstandiger kon werken met code. Naast de vormgeving heb ik een groot deel van de HTML, CSS en JavaScript zelf opgebouwd.
+              </p>
+            </div>
+
+            <div class="tech-tags-list">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">JavaScript</span>
+            </div>
+
+            <a href="#" class="live-project-link interactive" target="_blank" rel="noopener">
+              Bekijk live website &rarr;
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- TAB 2 CONTENT: PROJECT 2 -->
+      <section class="tab-panel" id="project-tab-2" role="tabpanel">
+        <div class="editorial-project-layout">
+          
+          <div class="hero-screenshot-col">
+            <div class="media-frame">
+              <img src="images/website2-main.png" alt="Screenshot De Groene Hoax" class="screenshot-img">
+              <div class="image-placeholder">
+                <span class="ph-label">Grote Screenshot Project 02</span>
+                <span class="ph-hint">images/website2-main.png</span>
+              </div>
+            </div>
+            
+            <div class="secondary-screenshots-grid">
+              <div class="media-frame sub-frame">
+                <img src="images/website2-detail1.png" alt="Typografie Grid" class="screenshot-img">
+                <div class="image-placeholder ph-small">Detail 01: Informatie &amp; Layout</div>
+              </div>
+              <div class="media-frame sub-frame">
+                <img src="images/website2-detail2.png" alt="Kleurstudie" class="screenshot-img">
+                <div class="image-placeholder ph-small">Detail 02: Groene Beeldtaal</div>
+              </div>
+            </div>
+            <span class="annotation note-process">stadsnatuur tilburg &bull; concept &amp; webdesign</span>
+          </div>
+
+          <div class="project-editorial-col">
+            <span class="annotation project-category">02 / Stadsnatuur Tilburg</span>
+            <h1 class="project-title">De Groene Hoax</h1>
+            
+            <p class="project-lead">
+              Voor dit project maakte ik een website rondom stadsnatuur in Tilburg. Uit ons onderzoek bleek dat mensen informatie vooral online opzoeken en daar niet te veel moeite voor willen doen. Daarom ontwierp ik een eenvoudige website waarop ons concept wordt uitgelegd en bezoekers kunnen ontdekken wat zij zelf kunnen doen voor een groenere stad.
+            </p>
+            
+            <div class="editorial-process-block">
+              <h2 class="process-subheading">Concept &amp; Uitvoering</h2>
+              <p>
+                Ik heb de website visueel laten aansluiten bij de rest van ons concept door dezelfde groene kleuren, rustige vormgeving en beeldtaal te gebruiken. De informatie heb ik bewust kort en overzichtelijk gehouden. Daarnaast voegde ik links toe naar bestaande organisaties en initiatieven, zodat bezoekers zelf verder kunnen kijken.
+              </p>
+            </div>
+
+            <div class="editorial-process-block">
+              <h2 class="process-subheading">Inzicht</h2>
+              <p>
+                Tijdens dit project merkte ik hoe belangrijk het is om onderzoeksresultaten daadwerkelijk te vertalen naar ontwerpkeuzes. Omdat onze doelgroep snel en makkelijk informatie wilde kunnen vinden, koos ik bewust voor een simpele en toegankelijke website.
+              </p>
+            </div>
+
+            <div class="tech-tags-list">
+              <span class="tech-tag">HTML</span>
+              <span class="tech-tag">CSS</span>
+              <span class="tech-tag">Onderzoek &amp; Webdesign</span>
+            </div>
+
+            <a href="#" class="live-project-link interactive" target="_blank" rel="noopener">
+              Bekijk live website &rarr;
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+  </div>
+
+</body>
+</html>

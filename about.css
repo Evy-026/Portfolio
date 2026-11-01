@@ -1,0 +1,681 @@
+/* ==========================================================================
+   ABOUT.CSS - EDITORIAL OVER MIJ & PERSONAL DIARY (GEEN SHADOWS)
+   ========================================================================== */
+
+/* 1. CSS VARIABELEN & KLEURENPALET */
+:root {
+  --color-bg: #FAF7F2;            /* Warm off-white achtergrond */
+  --color-evergreen: #1D3328;     /* Donker evergreen (hoofdtekst) */
+  --color-fern: #527A58;          /* Fern green */
+  --color-olive: #A8C686;         /* Muted olive */
+  --color-cotton-candy: #E6A0A8;  /* Cotton candy pink */
+  --color-gold: #F4D35E;          /* Royal gold */
+  --color-pink: #F3D6DC;          /* Zacht pastelroze */
+  --color-yellow: #F5E8B8;        /* Zacht pastelgeel */
+  --color-star-yellow: #F4D35E;   /* Gele ster cursor */
+
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. BASE RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-evergreen);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 6rem;
+}
+
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-evergreen);
+  opacity: 0.85;
+}
+
+/* Verberg de standaard browsercursor op desktop */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, select, textarea, .interactive {
+    cursor: none !important;
+  }
+}
+
+/* 3. CUSTOM CURSOR SYSTEEM */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+  border: 1.5px solid var(--color-evergreen);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease, border-radius 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor.cursor--active {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-star-yellow);
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  body, a, button, input, select, textarea, .interactive {
+    cursor: auto !important;
+  }
+}
+
+/* 4. LAYOUT CONTAINER */
+.page-wrapper {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+/* 5. SUBPAGE HEADER */
+.subpage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subpage-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.back-text-btn {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-evergreen);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+
+.back-text-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: var(--color-evergreen);
+  transition: width 0.22s var(--ease-snappy);
+}
+
+.back-text-btn:hover::after {
+  width: 100%;
+}
+
+/* 6. EDITORIAL HERO SPLIT-SCREEN */
+.editorial-hero-split {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+  padding-top: 1rem;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.split-intro-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.intro-headline {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.intro-lead {
+  font-size: 1.15rem;
+  line-height: 1.65;
+  opacity: 0.95;
+}
+
+.intro-body {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
+.quick-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.text-contact-link {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-evergreen);
+  border-bottom: 1.5px solid var(--color-evergreen);
+  padding-bottom: 2px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.text-contact-link:hover {
+  color: var(--color-fern);
+  border-color: var(--color-fern);
+}
+
+.portrait-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.note-portrait {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  transform: rotate(-2deg);
+}
+
+.portrait-media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background-color: var(--color-pink);
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s var(--ease-snappy);
+}
+
+.frame-rotate-portrait {
+  transform: rotate(1.5deg);
+}
+
+.portrait-wrapper:hover .portrait-media-frame {
+  transform: rotate(0deg) scale(1.01);
+}
+
+.portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-light-green);
+  padding: 2rem;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+.ph-label { font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; }
+.ph-hint { font-size: 0.75rem; font-family: var(--font-mono); opacity: 0.65; }
+.ph-small { font-size: 0.85rem; font-weight: 700; font-family: var(--font-heading); }
+
+/* SCROLL INDICATOR */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  opacity: 0.7;
+  font-size: 0.85rem;
+  margin: 1rem 0;
+}
+
+.scroll-arrow {
+  font-size: 1.2rem;
+  animation: bounceArrow 1.5s infinite;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+/* 7. EDITORIAL STORY ROWS & SCROLL ANIMATIES */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1), transform 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.scroll-animate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.editorial-story-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.row-reversed {
+  grid-template-columns: 1.2fr 1fr;
+}
+
+.story-media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: var(--color-light-green);
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frame-rotate-neg { transform: rotate(-1.5deg); }
+.frame-rotate-pos { transform: rotate(1.2deg); }
+
+.story-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.story-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.section-num {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.story-title {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.story-content-col p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.subtle-skills-list {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+/* MANIFESTO QUOTE SECTION */
+.editorial-quote-section {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.manifesto-quote {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.3;
+  max-width: 850px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* 8. CONTACT SECTION ONDERAAN */
+.contact-editorial-section {
+  padding-top: 2rem;
+}
+
+.contact-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.contact-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+}
+
+.contact-lead {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.contact-links-group {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.primary-email-btn {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-evergreen);
+  background-color: var(--color-pink);
+  border: 1.5px solid var(--color-evergreen);
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  transition: all 0.22s var(--ease-snappy);
+}
+
+.primary-email-btn:hover {
+  background-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+.secondary-home-btn {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-evergreen);
+  border: 1.5px solid var(--color-evergreen);
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  transition: all 0.22s var(--ease-snappy);
+}
+
+.secondary-home-btn:hover {
+  background-color: var(--color-light-green);
+  transform: translateY(-2px);
+}
+
+/* 7.5. EDITORIAL GALLERY & EXTRA SECTIONS (SECTION 4, 5, 6) */
+.editorial-gallery-row {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.two-photos-wrapper {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 1.5rem;
+  align-items: flex-end;
+}
+
+.photo-box {
+  position: relative;
+  width: 100%;
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-pink);
+  transition: transform 0.25s var(--ease-snappy);
+}
+
+.photo-larger {
+  aspect-ratio: 4 / 3;
+}
+
+.photo-smaller {
+  aspect-ratio: 1 / 1;
+}
+
+.gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gallery-heading {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.gallery-text-block p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* SECTION 5: BREDE FOTO MET ANNOTATIE */
+.editorial-wide-photo-section {
+  width: 100%;
+}
+
+.wide-photo-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.wide-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  background-color: var(--color-yellow);
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.wide-photo-note {
+  align-self: flex-end;
+}
+
+/* SECTION 6: TRIO FOTO'S & TEXT PARAGRAPH */
+.editorial-trio-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.trio-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.trio-heading {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.trio-photos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.trio-item {
+  position: relative;
+  width: 100%;
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-pink);
+  transition: transform 0.25s var(--ease-snappy);
+}
+
+.trio-1 { aspect-ratio: 3 / 4; }
+.trio-2 { aspect-ratio: 1 / 1; transform: translateY(-10px); }
+.trio-3 { aspect-ratio: 4 / 5; }
+
+.trio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.trio-text-paragraph {
+  max-width: 800px;
+}
+
+.trio-text-paragraph p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* HOVER FOTO SWAP LOGICA VOOR ABOUT ME FRAMES */
+.photo-default {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.2s var(--ease-snappy);
+}
+
+.photo-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.2s var(--ease-snappy);
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .portrait-media-frame:hover .photo-default,
+  .story-media-frame:hover .photo-default,
+  .photo-box:hover .photo-default,
+  .wide-photo-frame:hover .photo-default,
+  .trio-item:hover .photo-default,
+  .hover-photo:hover .photo-default {
+    opacity: 0;
+  }
+
+  .portrait-media-frame:hover .photo-hover,
+  .story-media-frame:hover .photo-hover,
+  .photo-box:hover .photo-hover,
+  .wide-photo-frame:hover .photo-hover,
+  .trio-item:hover .photo-hover,
+  .hover-photo:hover .photo-hover {
+    opacity: 1;
+  }
+}
+
+/* 9. RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .editorial-hero-split, .editorial-story-row, .row-reversed, .editorial-gallery-row, .trio-photos-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .two-photos-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wide-photo-frame {
+    aspect-ratio: 16 / 9;
+  }
+
+  .trio-2 {
+    transform: translateY(0);
+  }
+}

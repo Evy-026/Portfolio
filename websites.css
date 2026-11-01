@@ -1,0 +1,443 @@
+/* ==========================================================================
+   WEBSITES.CSS - BROWSER INTERFACE WITH PASTEL TABS & MONO ANNOTATIONS
+   ========================================================================== */
+
+/* 1. CSS VARIABELEN & KLEURENPALET */
+:root {
+  --color-bg: #FAF7F2;            /* Warm off-white achtergrond */
+  --color-evergreen: #1D3328;     /* Donker evergreen */
+  --color-fern: #527A58;          /* Fern green */
+  --color-olive: #A8C686;         /* Muted olive */
+  --color-cotton-candy: #E6A0A8;  /* Cotton candy pink */
+  --color-gold: #F4D35E;          /* Royal gold */
+  --color-pink: #F3D6DC;          /* Zacht pastelroze */
+  --color-yellow: #F5E8B8;        /* Zacht pastelgeel */
+  --color-star-yellow: #F4D35E;   /* Gele ster cursor */
+
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. BASE RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body.browser-environment {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-evergreen);
+  line-height: 1.6;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-evergreen);
+  opacity: 0.85;
+}
+
+/* Verberg de standaard browsercursor op desktop */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, select, textarea, .interactive {
+    cursor: none !important;
+  }
+}
+
+/* 3. CUSTOM CURSOR SYSTEEM */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+  border: 1.5px solid var(--color-evergreen);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease, border-radius 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor.cursor--active {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-star-yellow);
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  body, a, button, input, select, textarea, .interactive {
+    cursor: auto !important;
+  }
+}
+
+/* 4. VOLLEDIGE VIEWPORT BROWSER CONTAINER */
+.fullscreen-browser {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+}
+
+/* BROWSER TOP BAR */
+.browser-top-bar {
+  background-color: rgba(168, 198, 134, 0.2);
+  border-bottom: 1.5px solid var(--color-evergreen);
+  padding: 0.5rem 1.5rem 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.browser-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.window-controls {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.control-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 1px solid var(--color-evergreen);
+}
+
+.control-red { background-color: var(--color-cotton-candy); }
+.control-yellow { background-color: var(--color-gold); }
+.control-green { background-color: var(--color-olive); }
+
+/* BROWSER TABS MET EIGEN PASTEL TINTEN */
+.browser-tabs {
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-end;
+}
+
+.browser-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  border: 1.5px solid var(--color-evergreen);
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--color-evergreen);
+  outline: none;
+  transition: all 0.22s var(--ease-snappy);
+  position: relative;
+  top: 1.5px;
+}
+
+.tab-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid var(--color-evergreen);
+}
+
+.tab-pink { background-color: var(--color-cotton-candy); opacity: 0.85; }
+.tab-pink .tab-dot { background-color: #FFFFFF; }
+
+.tab-olive { background-color: var(--color-olive); opacity: 0.85; }
+.tab-olive .tab-dot { background-color: #FFFFFF; }
+
+.browser-tab:hover {
+  transform: translateY(-2px);
+  opacity: 1;
+}
+
+.browser-tab.active {
+  background-color: var(--color-bg);
+  opacity: 1;
+  font-weight: 700;
+  border-top: 3px solid var(--color-evergreen);
+  z-index: 2;
+}
+
+/* BROWSER ADRESBALK MIDDEN */
+.browser-address-bar {
+  background-color: #FFFFFF;
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 999px;
+  padding: 0.25rem 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  max-width: 420px;
+  flex: 1;
+}
+
+.address-lock {
+  font-size: 0.75rem;
+  opacity: 0.7;
+}
+
+.address-text {
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.browser-back-link {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--color-evergreen);
+  padding: 0.35rem 0.8rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease, transform 0.2s var(--ease-snappy);
+}
+
+.browser-back-link:hover {
+  background-color: var(--color-pink);
+  transform: translateX(-2px);
+}
+
+/* 5. BROWSER VIEWPORT & TAB PANELS */
+.browser-viewport {
+  flex: 1;
+  padding: 3.5rem 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+  animation: fadeInTab 0.25s var(--ease-snappy) forwards;
+}
+
+@keyframes fadeInTab {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.editorial-project-layout {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 4.5rem;
+  align-items: start;
+}
+
+.hero-screenshot-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.media-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background-color: var(--color-light-green);
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.frame-rotate-subtle {
+  transform: rotate(-0.5deg);
+}
+
+.screenshot-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  z-index: 2;
+}
+
+
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-light-green);
+  padding: 1.5rem;
+  text-align: center;
+  gap: 0.3rem;
+}
+
+.ph-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.ph-hint {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  opacity: 0.65;
+}
+
+.ph-small {
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+}
+
+.secondary-screenshots-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+
+.sub-frame {
+  aspect-ratio: 4 / 3;
+}
+
+.note-process {
+  margin-top: -0.5rem;
+  transform: rotate(-0.8deg);
+}
+
+.project-editorial-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.project-category {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.project-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.project-lead {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  opacity: 0.95;
+}
+
+.editorial-process-block {
+  margin-top: 0.5rem;
+}
+
+.process-subheading {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.editorial-process-block p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.tech-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tech-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: rgba(29, 51, 40, 0.08);
+  color: var(--color-evergreen);
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+}
+
+.live-project-link {
+  display: inline-block;
+  align-self: flex-start;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-evergreen);
+  border-bottom: 1.5px solid var(--color-evergreen);
+  padding-bottom: 2px;
+  margin-top: 1rem;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.live-project-link:hover {
+  color: var(--color-fern);
+  border-color: var(--color-fern);
+}
+
+/* 6. RESPONSIVE DESIGN */
+@media (max-width: 992px) {
+  .editorial-project-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .browser-viewport {
+    padding: 2rem 1.5rem;
+  }
+}

@@ -1,0 +1,678 @@
+/* ==========================================================================
+   MUZUS.CSS - CASE STUDY: "IS HET ÉCHT ZO STOER?" (MUZUS CONCEPT DEVELOPMENT)
+   ========================================================================== */
+
+/* 1. CSS VARIABELEN & PALET (AFGESTEMD OP PORTFOLIO V2 EDITORIAL STYLE) */
+:root {
+  --color-bg: #FAF7F2;            /* Warm off-white canvas */
+  --color-evergreen: #1D3328;     /* Donker evergreen (typografie & outlines) */
+  --color-fern: #527A58;          /* Fern green (accenten & titels) */
+  --color-olive: #A8C686;         /* Muted olive */
+  --color-cotton-candy: #E6A0A8;  /* Cotton candy pink */
+  --color-gold: #F4D35E;          /* Royal gold highlight */
+  --color-pink: #F3D6DC;          /* Zacht pastelroze */
+  --color-yellow: #F5E8B8;        /* Zacht pastelgeel */
+  --color-star-yellow: #F4D35E;   /* Gele ster cursor */
+
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. BASE RESET & GLOBALS */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-evergreen);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 5rem;
+  overflow-x: hidden;
+}
+
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-evergreen);
+  opacity: 0.85;
+  letter-spacing: 0.02em;
+}
+
+/* Verberg de standaard browsercursor op desktop ten gunste van de custom cursor */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, select, textarea, .interactive {
+    cursor: none !important;
+  }
+}
+
+/* 3. CUSTOM CURSOR SYSTEEM (Roze balletje -> Gele 5-puntige ster) */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+  border: 1.5px solid var(--color-evergreen);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease, border-radius 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor.cursor--active {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-star-yellow);
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  body, a, button, input, select, textarea, .interactive {
+    cursor: auto !important;
+  }
+}
+
+/* 4. LAYOUT WRAPPER */
+.page-wrapper {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+}
+
+/* 5. SUBPAGE HEADER */
+.subpage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.5rem;
+  border-bottom: 1.5px solid rgba(29, 51, 40, 0.12);
+}
+
+.header-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.subpage-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--color-evergreen);
+}
+
+.back-text-btn {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-evergreen);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.back-text-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: var(--color-evergreen);
+  transition: width 0.22s var(--ease-snappy);
+}
+
+.back-text-btn:hover::after {
+  width: 100%;
+}
+
+/* 6. EDITORIAL SPREAD CONTAINER */
+.editorial-muzus-spread {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+/* HERO SPREAD */
+.muzus-hero-spread {
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.muzus-intro-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.section-tag {
+  color: var(--color-fern);
+  font-weight: 600;
+}
+
+.editorial-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.editorial-subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--color-fern);
+  margin-top: -0.5rem;
+}
+
+.editorial-lead {
+  font-size: 1.1rem;
+  line-height: 1.68;
+  opacity: 0.95;
+}
+
+.concept-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.meta-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  background-color: rgba(29, 51, 40, 0.07);
+  color: var(--color-evergreen);
+  padding: 0.28rem 0.65rem;
+  border-radius: 4px;
+}
+
+/* HERO MEDIA FRAME */
+.muzus-hero-media-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.hero-media-frame {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  background-color: #FAF7F2;
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease-snappy);
+}
+
+.frame-rotate-subtle {
+  transform: rotate(-0.8deg);
+}
+
+.frame-rotate-pos {
+  transform: rotate(1deg);
+}
+
+.frame-rotate-neg {
+  transform: rotate(-1deg);
+}
+
+.hero-media-frame:hover,
+.muzus-frame:hover,
+.concept-visual-frame:hover {
+  transform: rotate(0deg) scale(1.015);
+}
+
+.note-corner {
+  align-self: flex-end;
+  font-size: 0.75rem;
+}
+
+/* 7. ALGEMEEN SECTIE DESIGN */
+.muzus-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.section-header-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  line-height: 1.18;
+}
+
+.section-lead {
+  font-size: 1.08rem;
+  line-height: 1.65;
+  max-width: 780px;
+  opacity: 0.95;
+}
+
+/* 2-KOLOMS EDITORIAL GRID */
+.editorial-grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.text-block p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0.95;
+}
+
+.media-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.frame-caption {
+  font-size: 0.75rem;
+  align-self: flex-start;
+}
+
+/* ALGEMENE MUZUS AFBEELDINGSFRAMES */
+.muzus-frame {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  background-color: #FAF7F2;
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease-snappy);
+}
+
+/* Kaders zonder actieve afbeelding krijgen een stijlvolle minimumhoogte voor de placeholder */
+.hero-media-frame:not(.has-image),
+.muzus-frame:not(.has-image),
+.concept-visual-frame:not(.has-image) {
+  min-height: 220px;
+}
+
+.hero-media-frame:not(.has-image) {
+  min-height: 280px;
+}
+
+.has-image {
+  min-height: 0 !important;
+}
+
+/* AFBEELDINGEN BEHOUDEN 100% HUN NATUURLIJKE VERHOUDING EN BREEDTE */
+.editorial-muzus-spread img,
+.hero-media-frame img,
+.muzus-frame img,
+.concept-visual-frame img,
+.concept-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+/* PLACEHOLDER VISUALS */
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-yellow);
+  padding: 1.5rem;
+  text-align: center;
+  gap: 0.35rem;
+  border: 1px dashed rgba(29, 51, 40, 0.25);
+  box-sizing: border-box;
+}
+
+.hero-media-frame .image-placeholder {
+  background-color: var(--color-pink);
+}
+
+/* Zodra een foto is geladen verdwijnt de placeholder direct */
+.has-image .image-placeholder {
+  display: none !important;
+}
+
+.ph-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--color-evergreen);
+}
+
+.ph-hint {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  opacity: 0.7;
+  color: var(--color-evergreen);
+}
+
+.ph-small .ph-label {
+  font-size: 0.95rem;
+}
+
+/* 8. SECTIE 02: SKETCHBOOK COMPOSITIE */
+.sketchbook-composition-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.sketch-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sketch-note {
+  font-size: 0.75rem;
+}
+
+.process-editorial-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  background: rgba(230, 160, 168, 0.12);
+  border-left: 3px solid var(--color-cotton-candy);
+  padding: 2rem 2.2rem;
+  border-radius: 6px;
+}
+
+.notes-subheading {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-evergreen);
+}
+
+.process-editorial-notes p {
+  font-size: 1.02rem;
+  line-height: 1.68;
+}
+
+.process-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.step-line {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.step-num {
+  font-weight: 700;
+  background: var(--color-evergreen);
+  color: var(--color-bg);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+/* 9. SECTIE 03: HET CONCEPT SHOWCASE */
+.concept-highlight-row {
+  max-width: 850px;
+}
+
+.concept-text-lead {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.concept-text-lead p:first-child {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-evergreen);
+  line-height: 1.4;
+}
+
+.concept-text-lead p:last-child {
+  font-size: 1.05rem;
+  line-height: 1.68;
+}
+
+.wide-concept-showcase {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* RASTER VOOR MEERDERE AFBEELDINGEN NAAST ELKAAR (AUTO-ADAPTIEF MET EIGEN HOOGTES) */
+.concept-duo-grid,
+.media-duo-grid,
+.two-images-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.2rem;
+  align-items: start; /* Ieder frame behoudt zijn eigen hoogte en beeldverhouding */
+  width: 100%;
+}
+
+/* Indien er slechts 1 afbeelding in het raster staat, benut deze automatisch de beschikbare breedte */
+.concept-duo-grid:has(> :only-child),
+.media-duo-grid:has(> :only-child),
+.two-images-row:has(> :only-child) {
+  grid-template-columns: 1fr;
+}
+
+/* Ondersteuning als iemand twee frames direct in .wide-concept-showcase plaatst */
+.wide-concept-showcase:has(.concept-visual-frame + .concept-visual-frame):not(:has(.concept-duo-grid)) {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.2rem;
+  align-items: start;
+}
+
+.wide-concept-showcase:has(.concept-visual-frame + .concept-visual-frame):not(:has(.concept-duo-grid)) .showcase-caption {
+  grid-column: 1 / -1;
+}
+
+.concept-visual-frame {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  background-color: #FAF7F2;
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.28s var(--ease-snappy);
+}
+
+.concept-visual-frame .image-placeholder {
+  background-color: var(--color-yellow);
+}
+
+.showcase-caption {
+  font-size: 0.75rem;
+}
+
+/* 10. SECTIE 04: PRAKTIJK LAYOUT */
+.practice-layout {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* 11. SECTIE 05: REFLECTIE */
+.reflection-section {
+  margin-top: 1rem;
+}
+
+.reflection-wrapper {
+  padding: 2.5rem 2.8rem;
+  background: rgba(245, 232, 184, 0.4);
+  border: 1.5px dashed var(--color-fern);
+  border-radius: 8px;
+  max-width: 950px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.reflection-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.reflection-text p {
+  font-size: 1.05rem;
+  line-height: 1.72;
+}
+
+/* 12. BOTTOM NAV / TERUG KNOP */
+.muzus-footer-nav {
+  display: flex;
+  justify-content: center;
+  padding: 2.5rem 0 1rem;
+}
+
+.primary-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 999px;
+  background-color: var(--color-bg);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-evergreen);
+  text-decoration: none;
+  transition: transform 0.22s var(--ease-snappy), background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 2px 2px 0 var(--color-evergreen);
+}
+
+.primary-home-btn:hover {
+  background-color: var(--color-gold);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--color-evergreen);
+}
+
+/* FOOTER */
+.subpage-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1.5px solid rgba(29, 51, 40, 0.08);
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* 13. SUBTIELE SCROLL ANIMATIES */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-animate.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 14. RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .page-wrapper {
+    padding: 1.8rem 1.25rem;
+    gap: 3.5rem;
+  }
+
+  .subpage-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .muzus-hero-spread,
+  .editorial-grid-two-col,
+  .sketchbook-composition-grid,
+  .concept-duo-grid,
+  .media-duo-grid,
+  .two-images-row,
+  .wide-concept-showcase:has(.concept-visual-frame + .concept-visual-frame):not(:has(.concept-duo-grid)) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .practice-layout {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .reflection-wrapper {
+    padding: 1.8rem 1.4rem;
+  }
+}

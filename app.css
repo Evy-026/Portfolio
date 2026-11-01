@@ -1,0 +1,391 @@
+/* ==========================================================================
+   APP.CSS - APP & INTERFACE DESIGN CASE STUDY STIJLEN
+   ========================================================================== */
+
+/* 1. CSS VARIABELEN & EIGEN KLEURENPALET VOOR APP-PAGINA */
+:root {
+  --color-bg: #FAF7F2;            /* Warm off-white achtergrond */
+  --color-evergreen: #1D3328;     /* Donker evergreen (hoofdtekst) */
+  --color-fern: #527A58;          /* Fern green */
+  --color-olive: #A8C686;         /* Muted olive (spaarzaam) */
+  --color-cotton-candy: #E6A0A8;  /* Cotton candy pink (prominent op app-pagina) */
+  --color-gold: #F4D35E;          /* Royal gold (alleen kleine highlights) */
+  --color-pink: #F3D6DC;          /* Zacht pastelroze */
+  --color-yellow: #F5E8B8;        /* Zacht pastelgeel */
+  --color-star-yellow: #F4D35E;   /* Gele ster cursor */
+
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. BASE RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-evergreen);
+  line-height: 1.6;
+  min-height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-evergreen);
+  opacity: 0.85;
+}
+
+/* Verberg de standaard browsercursor op desktop */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, select, textarea, .interactive {
+    cursor: none !important;
+  }
+}
+
+/* 3. CUSTOM CURSOR SYSTEEM (Roze balletje -> Gele 5-puntige ster) */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+  border: 1.5px solid var(--color-evergreen);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease, border-radius 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor.cursor--active {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-star-yellow);
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  body, a, button, input, select, textarea, .interactive {
+    cursor: auto !important;
+  }
+}
+
+/* 4. LAYOUT CONTAINER */
+.page-wrapper {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+/* 5. SUBPAGE HEADER */
+.subpage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subpage-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.back-text-btn {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-evergreen);
+  position: relative;
+  padding-bottom: 2px;
+  transition: color 0.2s ease;
+}
+
+.back-text-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1.5px;
+  background-color: var(--color-evergreen);
+  transition: width 0.22s var(--ease-snappy);
+}
+
+.back-text-btn:hover::after {
+  width: 100%;
+}
+
+/* 6. EDITORIAL APP SPREAD */
+.editorial-app-spread {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.app-hero-spread {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.app-intro-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.editorial-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.5vw, 3rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.editorial-lead {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  opacity: 0.95;
+}
+
+.editorial-highlights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+.hl-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.hl-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: rgba(230, 160, 168, 0.25);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* ORGANISCH ROZE VLAK ONDER DE HERO MOCKUP (GEEN SHADOW) */
+.app-mockup-col {
+  display: flex;
+  justify-content: center;
+}
+
+.mockup-blob-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+}
+
+.organic-blob-pink {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  width: 280px;
+  height: 280px;
+  background-color: var(--color-pink);
+  opacity: 0.45;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.phone-hero-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 18;
+  background-color: var(--color-cotton-candy);
+  border: 1.5px solid var(--color-evergreen);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: transform 0.22s var(--ease-snappy);
+}
+
+.frame-rotate-subtle {
+  transform: rotate(-1deg);
+}
+
+.mockup-blob-wrapper:hover .phone-hero-frame {
+  transform: rotate(0deg) scale(1.02);
+}
+
+.phone-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.image-placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-pink);
+  padding: 2rem;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+.ph-label { font-family: var(--font-heading); font-weight: 700; font-size: 1.25rem; }
+.ph-hint { font-size: 0.75rem; font-family: var(--font-mono); opacity: 0.65; }
+.ph-small { font-size: 0.85rem; font-weight: 700; font-family: var(--font-heading); }
+
+/* 7. APP SECTIES (TEKST DIREKCT OP CANVAS) */
+.app-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-text-block {
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.section-heading {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  font-weight: 800;
+}
+
+.section-text-block p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+/* GROOTE APP SHOWCASE AFBEELDING */
+.app-showcase-section {
+  width: 100%;
+  padding: 1rem 0;
+}
+
+.app-showcase {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1.5px solid var(--color-evergreen);
+}
+
+.app-showcase img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
+}
+
+.app-showcase .image-placeholder {
+  position: absolute;
+  inset: 0;
+  min-height: 350px;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-pink);
+  padding: 2rem;
+  text-align: center;
+  gap: 0.4rem;
+}
+
+/* GRID MET TWEE KOLOMMEN VOOR ONTWERPKEUZES & PROCES */
+.grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+}
+
+.col-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.col-block p {
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.tech-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tech-tag {
+  font-size: 0.8rem;
+  font-weight: 600;
+  background-color: rgba(29, 51, 40, 0.08);
+  color: var(--color-evergreen);
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+}
+
+/* 8. RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .app-hero-spread, .grid-two-col {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}

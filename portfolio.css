@@ -1,0 +1,467 @@
+/* ==========================================================================
+   PORTFOLIO.CSS - HOOFDPAGINA SKETCHBOOK & EDITORIAL STIJLEN
+   ========================================================================== */
+
+/* 1. CSS VARIABELEN & NIEUW KLEURENPALET */
+:root {
+  --color-bg: #FAF7F2;            /* Warm off-white achtergrond */
+  --color-evergreen: #1D3328;     /* Donker evergreen (hoofdtekst & inkt) */
+  --color-fern: #527A58;          /* Fern green */
+  --color-olive: #A8C686;         /* Muted olive */
+  --color-cotton-candy: #E6A0A8;  /* Cotton candy pink (accent) */
+  --color-gold: #F4D35E;          /* Royal gold (accent) */
+  --color-pink: #F3D6DC;          /* Zacht pastelroze */
+  --color-yellow: #F5E8B8;        /* Zacht pastelgeel */
+  --color-star-yellow: #F4D35E;   /* Gele ster cursor */
+
+  --font-heading: 'Bricolage Grotesque', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --ease-snappy: cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* 2. BASE RESET */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-evergreen);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Verberg de standaard browsercursor op desktop */
+@media (hover: hover) and (pointer: fine) {
+  body, a, button, input, select, textarea, .interactive {
+    cursor: none !important;
+  }
+}
+
+/* 3. HERBRUIKBARE ANNOTATIE KLASSE (SCHETSBOEK ACCENTFONT) */
+.annotation {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-evergreen);
+  opacity: 0.85;
+  letter-spacing: -0.01em;
+  display: inline-block;
+}
+
+/* 4. CUSTOM CURSOR SYSTEEM (Roze balletje -> Gele 5-puntige ster) */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--color-pink);
+  border: 1.5px solid var(--color-evergreen);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease, border-radius 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor.cursor--active {
+  width: 32px;
+  height: 32px;
+  background-color: var(--color-star-yellow);
+  border: none;
+  border-radius: 0;
+  clip-path: polygon(
+    50% 0%, 
+    61% 35%, 
+    98% 35%, 
+    68% 57%, 
+    79% 91%, 
+    50% 70%, 
+    21% 91%, 
+    32% 57%, 
+    2% 35%, 
+    39% 35%
+  );
+  transform: translate(-50%, -50%) scale(1.15) rotate(10deg);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+  body, a, button, input, select, textarea, .interactive {
+    cursor: auto !important;
+  }
+}
+
+/* 5. LAYOUT CONTAINER */
+.page-wrapper {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 6. HEADER & NAVIGATIE */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  text-decoration: none;
+  color: var(--color-evergreen);
+}
+
+.profile-image-box {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-evergreen);
+  background-color: var(--color-pink);
+  transition: transform 0.22s var(--ease-snappy);
+}
+
+.profile-image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.profile-image-box .img-default {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.22s ease;
+}
+
+.profile-image-box .img-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+
+.placeholder-avatar {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: var(--color-pink);
+}
+
+.profile-text-group {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.profile-text {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.profile-note {
+  font-size: 0.72rem;
+  transform: rotate(-1.5deg);
+}
+
+.profile-link:hover .profile-image-box {
+  transform: scale(1.06) rotate(-2deg);
+}
+
+.profile-link:hover .img-default { opacity: 0; }
+.profile-link:hover .img-hover { opacity: 1; }
+
+/* RECHTSBOVEN TEKSTNAVIGATIE MET GEVARIEERDE HOVER STIJLEN */
+.top-nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.nav-text-link {
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-evergreen);
+  position: relative;
+  transition: color 0.2s var(--ease-snappy);
+}
+
+/* TYPE 1: HIGHLIGHT BOX OP HOVER */
+.link-type-highlight::before {
+  content: '';
+  position: absolute;
+  inset: -2px -6px;
+  background-color: var(--color-pink);
+  border-radius: 4px;
+  z-index: -1;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.2s var(--ease-snappy);
+}
+
+.link-type-highlight:hover::before {
+  opacity: 0.8;
+  transform: scale(1);
+}
+
+/* TYPE 2: ARROW ANIMATIE OP HOVER */
+.link-type-arrow .arrow-icon {
+  display: inline-block;
+  transition: transform 0.22s var(--ease-snappy);
+}
+
+.link-type-arrow:hover .arrow-icon {
+  transform: translateX(4px);
+}
+
+/* TYPE 3: ACCENT STIP OP HOVER */
+.link-type-dot .dot-accent {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+  margin-left: 3px;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.22s var(--ease-snappy);
+}
+
+.link-type-dot:hover .dot-accent {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 7. ÉÉN DOORLOPEND CREATIEF CANVAS (GEEN APARTE SECTIES, GEEN BOBBING ANIMATIE) */
+.floating-canvas {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-items: start;
+  padding: 1.5rem 0 3.5rem 0;
+  position: relative;
+  row-gap: clamp(3rem, 5.5vh, 4.5rem);
+}
+
+.canvas-top-note {
+  grid-column: 1 / span 12;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.object-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* BOVENSTE GEDEELTE: 3 PROJECTEN VERSPREID OVER HET BOVENSTE CANVASSCHERM */
+.wrapper-laptop {
+  grid-column: 1 / span 4;
+  align-self: center;
+}
+
+.wrapper-canvas {
+  grid-column: 5 / span 4;
+  align-self: start;
+  margin-top: -1.2rem;
+}
+
+.wrapper-phone {
+  grid-column: 9 / span 4;
+  align-self: center;
+}
+
+/* ONDERSTE GEDEELTE: GROTE VAPE ASYMMETRISCH OP HET VERVOLG VAN HET CANVAS */
+.wrapper-vape {
+  grid-column: 2 / span 5;
+  align-self: start;
+}
+
+.label-object {
+  margin-bottom: 0.6rem;
+  transform: rotate(-1deg);
+}
+
+.sublabel-object {
+  margin-top: -0.25rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.95;
+  transform: rotate(0.8deg);
+}
+
+/* FLOATING OBJECTEN (TRANSPARANT, GEEN KADERS, GEEN SHADOWS) */
+.floating-object {
+  text-decoration: none;
+  color: var(--color-evergreen);
+  display: block;
+  position: relative;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  transition: transform 0.22s var(--ease-snappy);
+}
+
+.object-image-stack {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.object-image-stack img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border: none !important;
+  box-shadow: none !important;
+  transition: opacity 0.22s ease, transform 0.22s var(--ease-snappy);
+}
+
+.object-image-stack .img-default {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+}
+
+.object-image-stack .img-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  opacity: 0;
+}
+
+/* VAPE SPECIFIEKE SCHAAL: GELIJKWAARDIG VISUEEL GEWICHT (300-400px HOOGTE) */
+.object-vape {
+  width: 100%;
+  max-width: 320px;
+}
+
+.vape-image-stack {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 380px;
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.vape-image-stack img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  border: none !important;
+  box-shadow: none !important;
+  transition: opacity 0.22s ease, transform 0.22s var(--ease-snappy);
+}
+
+/* SNAPPY HOVER EFFECT (IMAGE SWAP & SUBTIELE LIFT) */
+.floating-object:hover {
+  transform: translateY(-4px) scale(1.03) rotate(0.8deg);
+}
+
+.floating-object:hover .img-default { opacity: 0; }
+.floating-object:hover .img-hover { opacity: 1; }
+
+/* 8. FOOTER */
+.homepage-footer {
+  text-align: center;
+  padding: 2.5rem 0 1.5rem 0;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* 9. RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+  .floating-canvas {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+    padding: 1.5rem 0;
+  }
+
+  .canvas-top-note {
+    grid-column: span 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .wrapper-laptop,
+  .wrapper-canvas,
+  .wrapper-phone,
+  .wrapper-vape {
+    grid-column: span 1;
+    align-self: center;
+    margin: 0 auto;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .wrapper-canvas {
+    margin-top: 0;
+  }
+
+  .vape-image-stack {
+    height: 320px;
+    max-width: 280px;
+  }
+}

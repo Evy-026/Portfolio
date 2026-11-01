@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio | Creatief Ontwerper</title>
+  <!-- Google Fonts: Bricolage Grotesque, DM Sans & IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Koppeling met portfolio.css -->
+  <link rel="stylesheet" href="portfolio.css">
+  <!-- Koppeling met portfolio.js -->
+  <script src="portfolio.js" defer></script>
+</head>
+<body>
+
+  <!-- CUSTOM CURSOR ELEMENT -->
+  <div class="custom-cursor" id="customCursor"></div>
+
+  <!-- CONTAINER EN VERSIERDE ACHTERGROND -->
+  <div class="page-wrapper">
+
+    <!-- HEADER: PROFIELICOON LINKSBOVEN EN EENVOUDIGE TEKSTNAVIGATIE RECHTSBOVEN -->
+    <header class="main-header">
+      
+      <!-- Profiel Illustratie met schets-annotatie -->
+      <a href="about.html" class="profile-link hover-image-container interactive" title="Over Mij / Contact">
+        <div class="profile-image-box">
+          <img src="images/about-portrait-hover.png" alt="Mijn Profiel - Schets" class="img-default">
+          <img src="images/about-portrait-hover.png" alt="Mijn Profiel - Kleur Versie" class="img-hover">
+
+        </div>
+        <div class="profile-text-group">
+          <span class="profile-text">Over mij &amp; Contact</span>
+          <span class="annotation profile-note">that's me &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Hoofdnavigatie rechtsboven -->
+      <nav class="top-nav">
+        <ul>
+          <li>
+            <a href="about.html" class="nav-text-link link-type-arrow interactive">Contact / Over mij <span class="arrow-icon">&rarr;</span></a>
+          </li>
+          <li>
+            <a href="#" class="nav-text-link link-type-dot interactive">Inspiratie <span class="dot-accent"></span></a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ÉÉN DOORLOPEND CREATIEF CANVAS VOOR ALLE PROJECTEN -->
+    <main class="floating-canvas">
+
+      <!-- GECENTREERDE ANNOTATIE BOVENIN -->
+      <div class="canvas-top-note">
+        <span class="annotation">choose something &darr;</span>
+      </div>
+
+      <!-- OBJECT 1: LAPTOP / COMPUTER -> WEBSITES -->
+      <div class="object-wrapper wrapper-laptop">
+        <span class="annotation label-object">01 / web &amp; interaction</span>
+        
+        <a href="websites.html" class="floating-object object-laptop hover-image-container interactive" title="Website Projecten">
+          <div class="object-image-stack">
+            <img src="images/laptop-off.png" alt="Laptop uit" class="img-default">
+            <img src="images/laptop-on.png" alt="Laptop aan" class="img-hover">
+          </div>
+        </a>
+      </div>
+
+      <!-- OBJECT 2: SCHILDERIJ / CANVAS -> POSTER -->
+      <div class="object-wrapper wrapper-canvas">
+        <span class="annotation label-object">02 / graphic study</span>
+        
+        <a href="poster.html" class="floating-object object-canvas hover-image-container interactive" title="Poster &amp; Grafisch Ontwerp">
+          <div class="object-image-stack">
+            <img src="images/canvas-empty.png" alt="Leeg canvas" class="img-default">
+            <img src="images/canvas-painted.png" alt="Beschilderd canvas" class="img-hover">
+          </div>
+        </a>
+      </div>
+
+      <!-- OBJECT 3: PHONE -> APP / INTERFACE DESIGN -->
+      <div class="object-wrapper wrapper-phone">
+        <span class="annotation label-object">03 / interface design</span>
+        
+        <a href="app.html" class="floating-object object-phone hover-image-container interactive" title="App &amp; Interface Design">
+          <div class="object-image-stack">
+            <img src="images/phone-off.png" alt="Telefoon uit" class="img-default">
+            <img src="images/phone-on.png" alt="Telefoon aan" class="img-hover">
+          </div>
+        </a>
+      </div>
+
+      <!-- OBJECT 4: VAPE -> MUZUS CONCEPT DEVELOPMENT (GROOT & ASYMMETRISCH GEPLAATST) -->
+      <div class="object-wrapper wrapper-vape">
+        <span class="annotation label-object">04 / concept development</span>
+        
+        <a href="muzus.html" class="floating-object object-vape hover-image-container interactive" title="Muzus &ndash; Is het &eacute;cht zo stoer?">
+          <div class="object-image-stack vape-image-stack">
+            <img src="images/vape-off.png" alt="Vape - Is het écht zo stoer?" class="img-default">
+            <img src="images/vape-on.png" alt="Vape - Concept oplichtend" class="img-hover">
+          </div>
+        </a>
+      </div>
+
+    </main>
+
+    <!-- SUBTIELE FOOTER MET ANNOTATIE -->
+    <footer class="homepage-footer">
+      <p><span class="annotation">Portfolio v2.0 &bull; Evy Verhelst</span> &bull; &copy; 2026</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
